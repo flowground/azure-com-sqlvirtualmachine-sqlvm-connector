@@ -1,0 +1,339 @@
+{
+    "title": "SqlVirtualMachineManagementClient",
+    "description": "The SQL virtual machine management API provides a RESTful set of web APIs that interact with Azure Compute, Network & Storage services to manage your SQL Server virtual machine. The API enables users to create, delete and retrieve a SQL virtual machine, SQL virtual machine group or availability group listener.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/sqlvirtualmachine-sqlvm/2017-03-01-preview/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available SQL Rest API operations.",
+            "description": "Lists all of the available SQL Rest API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_List": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_List.js",
+            "title": "Gets all SQL virtual machine groups in a subscription.",
+            "description": "Gets all SQL virtual machine groups in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_List": {
+            "main": "./lib/actions/SqlVirtualMachines_List.js",
+            "title": "Gets all SQL virtual machines in a subscription.",
+            "description": "Gets all SQL virtual machines in a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_ListByResourceGroup": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_ListByResourceGroup.js",
+            "title": "Gets all SQL virtual machine groups in a resource group.",
+            "description": "Gets all SQL virtual machine groups in a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_Delete": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_Delete.js",
+            "title": "Deletes a SQL virtual machine group.",
+            "description": "Deletes a SQL virtual machine group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_Get": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_Get.js",
+            "title": "Gets a SQL virtual machine group.",
+            "description": "Gets a SQL virtual machine group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_Update": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_Update.js",
+            "title": "Updates SQL virtual machine group tags.",
+            "description": "Updates SQL virtual machine group tags.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachineGroups_CreateOrUpdate": {
+            "main": "./lib/actions/SqlVirtualMachineGroups_CreateOrUpdate.js",
+            "title": "Creates or updates a SQL virtual machine group.",
+            "description": "Creates or updates a SQL virtual machine group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachineGroups_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AvailabilityGroupListeners_ListByGroup": {
+            "main": "./lib/actions/AvailabilityGroupListeners_ListByGroup.js",
+            "title": "Lists all availability group listeners in a SQL virtual machine group.",
+            "description": "Lists all availability group listeners in a SQL virtual machine group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailabilityGroupListeners_ListByGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AvailabilityGroupListeners_Delete": {
+            "main": "./lib/actions/AvailabilityGroupListeners_Delete.js",
+            "title": "Deletes an availability group listener.",
+            "description": "Deletes an availability group listener.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailabilityGroupListeners_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AvailabilityGroupListeners_Get": {
+            "main": "./lib/actions/AvailabilityGroupListeners_Get.js",
+            "title": "Gets an availability group listener.",
+            "description": "Gets an availability group listener.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailabilityGroupListeners_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "AvailabilityGroupListeners_CreateOrUpdate": {
+            "main": "./lib/actions/AvailabilityGroupListeners_CreateOrUpdate.js",
+            "title": "Creates or updates an availability group listener.",
+            "description": "Creates or updates an availability group listener.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/AvailabilityGroupListeners_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_ListByResourceGroup": {
+            "main": "./lib/actions/SqlVirtualMachines_ListByResourceGroup.js",
+            "title": "Gets all SQL virtual machines in a resource group.",
+            "description": "Gets all SQL virtual machines in a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_Delete": {
+            "main": "./lib/actions/SqlVirtualMachines_Delete.js",
+            "title": "Deletes a SQL virtual machine.",
+            "description": "Deletes a SQL virtual machine.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_Get": {
+            "main": "./lib/actions/SqlVirtualMachines_Get.js",
+            "title": "Gets a SQL virtual machine.",
+            "description": "Gets a SQL virtual machine.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_Update": {
+            "main": "./lib/actions/SqlVirtualMachines_Update.js",
+            "title": "Updates a SQL virtual machine.",
+            "description": "Updates a SQL virtual machine.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SqlVirtualMachines_CreateOrUpdate": {
+            "main": "./lib/actions/SqlVirtualMachines_CreateOrUpdate.js",
+            "title": "Creates or updates a SQL virtual machine.",
+            "description": "Creates or updates a SQL virtual machine.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SqlVirtualMachines_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

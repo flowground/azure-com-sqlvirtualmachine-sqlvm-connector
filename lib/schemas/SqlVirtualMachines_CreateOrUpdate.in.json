@@ -1,0 +1,446 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "sqlVirtualMachineName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM tracked top level resource.",
+                    "properties": {
+                        "location": {
+                            "description": "Resource location.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags.",
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "A SQL virtual machine.",
+            "properties": {
+                "identity": {
+                    "description": "Azure Active Directory identity of the server.",
+                    "x-ms-mutability": [
+                        "read",
+                        "create"
+                    ],
+                    "properties": {
+                        "principalId": {
+                            "description": "The Azure Active Directory principal id.",
+                            "format": "uuid",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tenantId": {
+                            "description": "The Azure Active Directory tenant id.",
+                            "format": "uuid",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource.",
+                            "enum": [
+                                "SystemAssigned"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "IdentityType"
+                            }
+                        }
+                    },
+                    "type": "object"
+                },
+                "properties": {
+                    "description": "Resource properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "autoBackupSettings": {
+                            "description": "Auto backup settings for SQL Server.",
+                            "properties": {
+                                "backupScheduleType": {
+                                    "description": "Backup schedule type.",
+                                    "enum": [
+                                        "Manual",
+                                        "Automated"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "BackupScheduleType"
+                                    }
+                                },
+                                "backupSystemDbs": {
+                                    "description": "Include or exclude system databases from auto backup.",
+                                    "type": "boolean"
+                                },
+                                "enable": {
+                                    "description": "Enable or disable autobackup on SQL virtual machine.",
+                                    "type": "boolean"
+                                },
+                                "enableEncryption": {
+                                    "description": "Enable or disable encryption for backup on SQL virtual machine.",
+                                    "type": "boolean"
+                                },
+                                "fullBackupFrequency": {
+                                    "description": "Frequency of full backups. In both cases, full backups begin during the next scheduled time window.",
+                                    "enum": [
+                                        "Daily",
+                                        "Weekly"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "FullBackupFrequencyType"
+                                    }
+                                },
+                                "fullBackupStartTime": {
+                                    "description": "Start time of a given day during which full backups can take place. 0-23 hours.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "fullBackupWindowHours": {
+                                    "description": "Duration of the time window of a given day during which full backups can take place. 1-23 hours.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "logBackupFrequency": {
+                                    "description": "Frequency of log backups. 5-60 minutes.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "password": {
+                                    "description": "Password for encryption on backup.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "create",
+                                        "update"
+                                    ]
+                                },
+                                "retentionPeriod": {
+                                    "description": "Retention period of backup: 1-30 days.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "storageAccessKey": {
+                                    "description": "Storage account key where backup will be taken to.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "create",
+                                        "update"
+                                    ]
+                                },
+                                "storageAccountUrl": {
+                                    "description": "Storage account url where backup will be taken to.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "autoPatchingSettings": {
+                            "description": "Auto patching settings for applying critical security updates to SQL virtual machine.",
+                            "properties": {
+                                "dayOfWeek": {
+                                    "description": "Day of week to apply the patch on.",
+                                    "enum": [
+                                        "Monday",
+                                        "Tuesday",
+                                        "Wednesday",
+                                        "Thursday",
+                                        "Friday",
+                                        "Saturday",
+                                        "Sunday"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "DayOfWeek"
+                                    }
+                                },
+                                "enable": {
+                                    "description": "Enable or disable autopatching on SQL virtual machine.",
+                                    "type": "boolean"
+                                },
+                                "maintenanceWindowDuration": {
+                                    "description": "Duration of patching.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "maintenanceWindowStartingHour": {
+                                    "description": "Hour of the day when patching is initiated. Local VM time.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "keyVaultCredentialSettings": {
+                            "description": "Key vault credential settings.",
+                            "properties": {
+                                "azureKeyVaultUrl": {
+                                    "description": "Azure Key Vault url.",
+                                    "type": "string"
+                                },
+                                "credentialName": {
+                                    "description": "Credential name.",
+                                    "type": "string"
+                                },
+                                "enable": {
+                                    "description": "Enable or disable key vault credential setting.",
+                                    "type": "boolean"
+                                },
+                                "servicePrincipalName": {
+                                    "description": "Service principal name to access key vault.",
+                                    "type": "string"
+                                },
+                                "servicePrincipalSecret": {
+                                    "description": "Service principal name secret to access key vault.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "create",
+                                        "update"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state to track the async operation status.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "serverConfigurationsManagementSettings": {
+                            "description": "SQL Server configuration management settings.",
+                            "properties": {
+                                "additionalFeaturesServerConfigurations": {
+                                    "description": "Additional SQL feature settings.",
+                                    "properties": {
+                                        "isRServicesEnabled": {
+                                            "description": "Enable or disable R services (SQL 2016 onwards).",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "sqlConnectivityUpdateSettings": {
+                                    "description": "SQL connectivity type settings.",
+                                    "properties": {
+                                        "connectivityType": {
+                                            "description": "SQL Server connectivity option.",
+                                            "enum": [
+                                                "LOCAL",
+                                                "PRIVATE",
+                                                "PUBLIC"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": true,
+                                                "name": "ConnectivityType"
+                                            }
+                                        },
+                                        "port": {
+                                            "description": "SQL Server port.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "sqlAuthUpdatePassword": {
+                                            "description": "SQL Server sysadmin login password.",
+                                            "type": "string",
+                                            "x-ms-mutability": [
+                                                "create"
+                                            ]
+                                        },
+                                        "sqlAuthUpdateUserName": {
+                                            "description": "SQL Server sysadmin login to create.",
+                                            "type": "string",
+                                            "x-ms-mutability": [
+                                                "create"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "sqlStorageUpdateSettings": {
+                                    "description": "SQL storage update settings.",
+                                    "properties": {
+                                        "diskConfigurationType": {
+                                            "description": "Disk configuration to apply to SQL Server.",
+                                            "enum": [
+                                                "NEW",
+                                                "EXTEND",
+                                                "ADD"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": true,
+                                                "name": "DiskConfigurationType"
+                                            }
+                                        },
+                                        "diskCount": {
+                                            "description": "Virtual machine disk count.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "startingDeviceId": {
+                                            "description": "Device id of the first disk to be updated.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "sqlWorkloadTypeUpdateSettings": {
+                                    "description": "SQL workload type settings.",
+                                    "properties": {
+                                        "sqlWorkloadType": {
+                                            "description": "SQL Server workload type.",
+                                            "enum": [
+                                                "GENERAL",
+                                                "OLTP",
+                                                "DW"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": true,
+                                                "name": "SqlWorkloadType"
+                                            },
+                                            "x-ms-mutability": [
+                                                "read",
+                                                "create"
+                                            ]
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "sqlImageOffer": {
+                            "description": "SQL image offer. Examples include SQL2016-WS2016, SQL2017-WS2016.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "sqlImageSku": {
+                            "description": "SQL image sku.",
+                            "enum": [
+                                "Developer",
+                                "Express",
+                                "Standard",
+                                "Enterprise",
+                                "Web"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SqlImageSku"
+                            }
+                        },
+                        "sqlServerLicenseType": {
+                            "description": "SQL Server license type.",
+                            "enum": [
+                                "PAYG",
+                                "AHUB"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SqlServerLicenseType"
+                            }
+                        },
+                        "sqlVirtualMachineGroupResourceId": {
+                            "description": "ARM resource id of the SQL virtual machine group this SQL virtual machine is or will be part of.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "update"
+                            ]
+                        },
+                        "virtualMachineResourceId": {
+                            "description": "ARM Resource id of underlying virtual machine created from SQL marketplace image.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "wsfcDomainCredentials": {
+                            "description": "Domain credentials for setting up Windows Server Failover Cluster for SQL availability group.",
+                            "properties": {
+                                "clusterBootstrapAccountPassword": {
+                                    "description": "Cluster bootstrap account password.",
+                                    "type": "string"
+                                },
+                                "clusterOperatorAccountPassword": {
+                                    "description": "Cluster operator account password.",
+                                    "type": "string"
+                                },
+                                "sqlServiceAccountPassword": {
+                                    "description": "SQL service account password.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

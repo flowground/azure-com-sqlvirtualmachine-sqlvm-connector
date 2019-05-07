@@ -1,0 +1,131 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "sqlVirtualMachineGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "availabilityGroupListenerName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM proxy resource.",
+                    "properties": {},
+                    "type": "object"
+                }
+            ],
+            "description": "A SQL Server availability group listener.",
+            "properties": {
+                "properties": {
+                    "description": "Resource properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "availabilityGroupName": {
+                            "description": "Name of the availability group.",
+                            "type": "string"
+                        },
+                        "createDefaultAvailabilityGroupIfNotExist": {
+                            "description": "Create a default availability group if it does not exist.",
+                            "type": "boolean"
+                        },
+                        "loadBalancerConfigurations": {
+                            "description": "List of load balancer configurations for an availability group listener.",
+                            "items": {
+                                "description": "A load balancer configuration for an availability group listener.",
+                                "properties": {
+                                    "loadBalancerResourceId": {
+                                        "description": "Resource id of the load balancer.",
+                                        "type": "string"
+                                    },
+                                    "privateIpAddress": {
+                                        "description": "Private IP address.",
+                                        "properties": {
+                                            "ipAddress": {
+                                                "description": "Private IP address bound to the availability group listener.",
+                                                "type": "string"
+                                            },
+                                            "subnetResourceId": {
+                                                "description": "Subnet used to include private IP.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "probePort": {
+                                        "description": "Probe port.",
+                                        "format": "int32",
+                                        "type": "integer"
+                                    },
+                                    "publicIpAddressResourceId": {
+                                        "description": "Resource id of the public IP.",
+                                        "type": "string"
+                                    },
+                                    "sqlVirtualMachineInstances": {
+                                        "description": "List of the SQL virtual machine instance resource id's that are enrolled into the availability group listener.",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "port": {
+                            "description": "Listener port.",
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state to track the async operation status.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

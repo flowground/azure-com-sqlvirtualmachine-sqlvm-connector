@@ -1,0 +1,223 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "sqlVirtualMachineGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "ARM resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Resource ID.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "description": "Resource name.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "description": "Resource type.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object",
+                            "x-ms-azure-resource": true
+                        }
+                    ],
+                    "description": "ARM tracked top level resource.",
+                    "properties": {
+                        "location": {
+                            "description": "Resource location.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags.",
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "A SQL virtual machine group.",
+            "properties": {
+                "properties": {
+                    "description": "Resource properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "clusterConfiguration": {
+                            "description": "Cluster type.",
+                            "enum": [
+                                "Domainful"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ClusterConfiguration"
+                            }
+                        },
+                        "clusterManagerType": {
+                            "description": "Type of cluster manager: Windows Server Failover Cluster (WSFC), implied by the scale type of the group and the OS type.",
+                            "enum": [
+                                "WSFC"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ClusterManagerType"
+                            }
+                        },
+                        "provisioningState": {
+                            "description": "Provisioning state to track the async operation status.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "scaleType": {
+                            "description": "Scale type.",
+                            "enum": [
+                                "HA"
+                            ],
+                            "readOnly": true,
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ScaleType"
+                            }
+                        },
+                        "sqlImageOffer": {
+                            "description": "SQL image offer. Examples may include SQL2016-WS2016, SQL2017-WS2016.",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "sqlImageSku": {
+                            "description": "SQL image sku.",
+                            "enum": [
+                                "Developer",
+                                "Enterprise"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "SqlVmGroupImageSku"
+                            },
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "wsfcDomainProfile": {
+                            "description": "Cluster Active Directory domain profile.",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ],
+                            "properties": {
+                                "clusterBootstrapAccount": {
+                                    "description": "Account name used for creating cluster (at minimum needs permissions to 'Create Computer Objects' in domain).",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read",
+                                        "create"
+                                    ]
+                                },
+                                "clusterOperatorAccount": {
+                                    "description": "Account name used for operating cluster i.e. will be part of administrators group on all the participating virtual machines in the cluster.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "update"
+                                    ]
+                                },
+                                "domainFqdn": {
+                                    "description": "Fully qualified name of the domain.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read",
+                                        "create"
+                                    ]
+                                },
+                                "fileShareWitnessPath": {
+                                    "description": "Optional path for fileshare witness.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read",
+                                        "create"
+                                    ]
+                                },
+                                "ouPath": {
+                                    "description": "Organizational Unit path in which the nodes and cluster will be present.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read",
+                                        "create"
+                                    ]
+                                },
+                                "sqlServiceAccount": {
+                                    "description": "Account name under which SQL service will run on all participating SQL virtual machines in the cluster.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "update"
+                                    ]
+                                },
+                                "storageAccountPrimaryKey": {
+                                    "description": "Primary key of the witness storage account.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "create"
+                                    ]
+                                },
+                                "storageAccountUrl": {
+                                    "description": "Fully qualified ARM resource id of the witness storage account.",
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read",
+                                        "create"
+                                    ]
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "location"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
